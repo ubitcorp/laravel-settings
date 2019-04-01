@@ -93,7 +93,10 @@ trait hasSettings
     }
 
     public function valueOfSettingAsArray($keyword){
-      return array_map("trim",explode(",",$this->valueOfSetting($keyword)));
+      if($this->valueOfSetting($keyword))
+          return array_map("trim",explode(",",$this->valueOfSetting($keyword)));
+        
+       return null;
     }    
 
 }
