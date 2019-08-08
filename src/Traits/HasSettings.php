@@ -56,15 +56,16 @@ trait hasSettings
     }
 
     public function removeSettings($keywords){
-      $keyword = trim($keyword);
 
-      if(!is_array($keywords))
-        return $this->removeSetting($keywords);
-      
-      $this->settings()->whereIn('keyword', $keywords)->delete();
+        foreach ($keywords as $key => $keyword)
+            $keywords[$key] = trim($keyword);
 
+        if(!is_array($keywords))
+            return $this->removeSetting($keywords);
 
-      $this->load('settings');
+        $this->settings()->whereIn('keyword', $keywords)->delete();
+
+        $this->load('settings');
     }    
 
     /**
